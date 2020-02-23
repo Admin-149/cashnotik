@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:start": "docker run --rm --name pg-docker --env-file .env -d -p 5432:5432 -v $(pwd)/tmp/db/cashnotik:/var/lib/postgresql/data postgres",
-    "db:stop": "docker stop pg-docker"
+    "db:stop": "docker stop pg-docker",
+    "server:start": "cd ./server && npm run start:dev"
   },
   "repository": {
     "type": "git",
