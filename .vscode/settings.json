@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "cashnotik",
+      "dialect": "PostgreSQL",
+      "name": "Postres",
+      "password": "Mint1234",
+      "port": 5432,
+      "server": "localhost",
+      "username": "cashnotik"
+    }
+  ]
+}
