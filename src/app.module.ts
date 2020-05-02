@@ -6,7 +6,7 @@ import { join } from 'path';
 import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { OperationCategoryModule } from './operation-category/operation-category.module';
+import { CategoryModule } from './category/category.module';
 import { OperationModule } from './operation/operation.module';
 
 @Module({
@@ -31,7 +31,7 @@ import { OperationModule } from './operation/operation.module';
             exclude: ['/api*'],
         }),
         AccountModule,
-        OperationCategoryModule,
+        CategoryModule,
         OperationModule,
     ],
 

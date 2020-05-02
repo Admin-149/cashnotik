@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { OperationCategory } from '../operation-category/operation-category.entity';
+import { Category } from '../category/category.entity';
 import { Account } from '../account/account.entity';
-
 
 @Entity()
 export class Operation {
@@ -23,8 +22,8 @@ export class Operation {
     @UpdateDateColumn({ type: 'timestamp' })
     updatedAt: Date;
 
-    @ManyToOne(type => OperationCategory, operationCategory => operationCategory.operations)
-    operationCategory: OperationCategory;
+    @ManyToOne(type => Category, category => category.operations)
+    category: Category;
 
     @ManyToOne(type => Account, account => account.operations)
     account: Account;
