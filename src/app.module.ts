@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -10,7 +12,7 @@ import { OperationModule } from './operation/operation.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: '../.env',
+            envFilePath: './.env',
             isGlobal: true,
         }),
         TypeOrmModule.forRoot({
@@ -23,6 +25,10 @@ import { OperationModule } from './operation/operation.module';
             entities: [],
             autoLoadEntities: true,
             synchronize: true,
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '..', 'client/build'),
+            exclude: ['/api*'],
         }),
         AccountModule,
         OperationCategoryModule,
