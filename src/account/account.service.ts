@@ -16,15 +16,15 @@ export class AccountService {
         return this.accountRepository.find();
     }
 
-    async findOne(id: string): Promise<Account> {
+    async findOne(id: number): Promise<Account> {
         return this.accountRepository.findOne(id);
     }
 
-    async remove(id: string): Promise<void> {
+    async remove(id: number): Promise<void> {
         await this.accountRepository.delete(id);
     }
 
-    async create(@Body('account') accountData: CreateAccountDto): Promise<Account> {
+    async create(@Body() accountData: CreateAccountDto): Promise<Account> {
         const existAccount = await this.accountRepository.findOne({ title: accountData.title });
         if (existAccount) {
             throw new HttpException('Account with same title already exist', HttpStatus.CONFLICT);
