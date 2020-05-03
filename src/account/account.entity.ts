@@ -11,7 +11,7 @@ export class Account {
     })
     title: string;
 
-    @Column()
+    @Column('decimal')
     amount: number;
 
     @OneToMany(type => Operation, operation => operation.account)

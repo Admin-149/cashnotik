@@ -4,8 +4,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AccountModule } from './account/account.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { CategoryModule } from './category/category.module';
 import { OperationModule } from './operation/operation.module';
 
@@ -35,7 +33,7 @@ import { OperationModule } from './operation/operation.module';
         OperationModule,
     ],
 
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
 })
 export class AppModule { }
