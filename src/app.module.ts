@@ -6,6 +6,8 @@ import { join } from 'path';
 import { AccountModule } from './account/account.module';
 import { CategoryModule } from './category/category.module';
 import { OperationModule } from './operation/operation.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
     imports: [
@@ -31,6 +33,8 @@ import { OperationModule } from './operation/operation.module';
         AccountModule,
         CategoryModule,
         OperationModule,
+        AuthModule,
+        UsersModule,
     ],
 
     controllers: [],
