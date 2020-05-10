@@ -27,7 +27,7 @@ import { UsersModule } from './users/users.module';
             synchronize: true,
         }),
         ServeStaticModule.forRoot({
-            rootPath: join(__dirname, '..', 'client/build'),
+            rootPath: join(__dirname, '..', 'build/'),
             exclude: ['/api*'],
         }),
         AccountModule,
