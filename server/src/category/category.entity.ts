@@ -3,14 +3,14 @@ import { Operation } from '../operation/operation.entity';
 
 @Entity('category')
 export class Category {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({
-        unique: true,
-    })
-    title: string;
+  @Column({
+    unique: true,
+  })
+  title: string;
 
-    @OneToMany(type => Operation, operation => operation.category)
-    operations: Operation[];
+  @OneToMany(type => Operation, operation => operation.category)
+  operations: Operation[];
 }

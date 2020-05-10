@@ -3,17 +3,17 @@ import { Operation } from '../operation/operation.entity';
 
 @Entity()
 export class Account {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({
-        unique: true,
-    })
-    title: string;
+  @Column({
+    unique: true,
+  })
+  title: string;
 
-    @Column('decimal')
-    amount: number;
+  @Column('decimal')
+  amount: number;
 
-    @OneToMany(type => Operation, operation => operation.account)
-    operations: Operation[];
+  @OneToMany(type => Operation, operation => operation.account)
+  operations: Operation[];
 }

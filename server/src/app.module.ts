@@ -10,34 +10,34 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-    imports: [
-        ConfigModule.forRoot({
-            envFilePath: './.env',
-            isGlobal: true,
-        }),
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DB,
-            entities: [],
-            autoLoadEntities: true,
-            synchronize: true,
-        }),
-        ServeStaticModule.forRoot({
-            rootPath: join(__dirname, '..', 'build/'),
-            exclude: ['/api*'],
-        }),
-        AccountModule,
-        CategoryModule,
-        OperationModule,
-        AuthModule,
-        UsersModule,
-    ],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: './.env',
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB,
+      entities: [],
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'build/'),
+      exclude: ['/api*'],
+    }),
+    AccountModule,
+    CategoryModule,
+    OperationModule,
+    AuthModule,
+    UsersModule,
+  ],
 
-    controllers: [],
-    providers: [],
+  controllers: [],
+  providers: [],
 })
-export class AppModule { }
+export class AppModule {}

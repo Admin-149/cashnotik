@@ -1,4 +1,4 @@
 export class UpdateAccountDto {
-    amount?: number;
-    title?: string;
+  amount?: number;
+  title?: string;
 }

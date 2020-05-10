@@ -1,4 +1,4 @@
 export class CreateAccountDto {
-    amount: number;
-    title: string;
+  amount: number;
+  title: string;
 }

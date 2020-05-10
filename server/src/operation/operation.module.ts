@@ -7,11 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Operation } from './operation.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Operation]),
-    CategoryModule,
-    AccountModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Operation]), CategoryModule, AccountModule],
   providers: [OperationService],
   controllers: [OperationController],
 })

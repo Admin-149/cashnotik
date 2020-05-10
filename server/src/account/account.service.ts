@@ -7,41 +7,41 @@ import { UpdateAccountDto } from './dto/update-account.dto';
 
 @Injectable()
 export class AccountService {
-    constructor(
-        @InjectRepository(Account)
-        private readonly accountRepository: Repository<Account>,
-    ) { }
+  constructor(
+    @InjectRepository(Account)
+    private readonly accountRepository: Repository<Account>,
+  ) {}
 
-    async findAll(): Promise<Account[]> {
-        return this.accountRepository.find();
+  async findAll(): Promise<Account[]> {
+    return this.accountRepository.find();
+  }
+
+  async findOne(id: number): Promise<Account> {
+    return this.accountRepository.findOne(id);
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.accountRepository.delete(id);
+  }
+
+  async create(@Body() accountData: CreateAccountDto): Promise<Account> {
+    const existAccount = await this.accountRepository.findOne({ title: accountData.title });
+    if (existAccount) {
+      throw new HttpException('Account with same title already exist', HttpStatus.CONFLICT);
     }
 
-    async findOne(id: number): Promise<Account> {
-        return this.accountRepository.findOne(id);
-    }
+    const account = new Account();
+    account.title = accountData.title;
+    account.amount = accountData.amount;
 
-    async remove(id: number): Promise<void> {
-        await this.accountRepository.delete(id);
-    }
+    await this.accountRepository.save(account);
+    return account;
+  }
 
-    async create(@Body() accountData: CreateAccountDto): Promise<Account> {
-        const existAccount = await this.accountRepository.findOne({ title: accountData.title });
-        if (existAccount) {
-            throw new HttpException('Account with same title already exist', HttpStatus.CONFLICT);
-        }
-
-        const account = new Account();
-        account.title = accountData.title;
-        account.amount = accountData.amount;
-
-        await this.accountRepository.save(account);
-        return account;
-    }
-
-    async update(id: number, @Body('account') accountData: UpdateAccountDto): Promise<Account> {
-        const accountToUpdate = await this.accountRepository.findOne({id});
-        const updatedAccount = Object.assign(accountToUpdate, accountData);
-        await this.accountRepository.save(updatedAccount);
-        return updatedAccount;
-    }
+  async update(id: number, @Body('account') accountData: UpdateAccountDto): Promise<Account> {
+    const accountToUpdate = await this.accountRepository.findOne({ id });
+    const updatedAccount = Object.assign(accountToUpdate, accountData);
+    await this.accountRepository.save(updatedAccount);
+    return updatedAccount;
+  }
 }
