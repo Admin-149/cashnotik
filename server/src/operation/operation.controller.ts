@@ -22,7 +22,7 @@ export class OperationController {
   @ApiOkResponse({ description: 'Return operation' })
   @ApiParam({ name: 'id', type: Number })
   @Get(':id')
-  async findOne(@Param('id') id) {
+  async findOne(@Param('id') id: number) {
     return this.operationService.findOne(id);
   }
 
@@ -37,7 +37,7 @@ export class OperationController {
   @ApiCreatedResponse({ description: 'The operation has been updated' })
   @ApiParam({ name: 'id', type: Number })
   @Put(':id')
-  async update(@Param('id') id, @Body() operationData: UpdateOperationDto) {
+  async update(@Param('id') id: number, @Body() operationData: UpdateOperationDto) {
     return this.operationService.update(id, operationData);
   }
 
@@ -45,7 +45,7 @@ export class OperationController {
   @ApiCreatedResponse({ description: 'The operation has been deleted' })
   @ApiParam({ name: 'id', type: Number })
   @Delete(':id')
-  async remove(@Param('id') id) {
+  async remove(@Param('id') id: number) {
     return this.operationService.remove(id);
   }
 }

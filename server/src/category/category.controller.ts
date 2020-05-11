@@ -37,7 +37,7 @@ export class CategoryController {
   @ApiCreatedResponse({ description: 'The category has been updated' })
   @ApiParam({ name: 'id', type: Number })
   @Put(':id')
-  async update(@Param('id') id, @Body() categoryData: UpdateCategoryDto) {
+  async update(@Param('id') id: number, @Body() categoryData: UpdateCategoryDto) {
     return this.categoryService.update(id, categoryData);
   }
 
@@ -45,7 +45,7 @@ export class CategoryController {
   @ApiCreatedResponse({ description: 'The category has been deleted' })
   @ApiParam({ name: 'id', type: Number })
   @Delete(':id')
-  async remove(@Param('id') id) {
+  async remove(@Param('id') id: number) {
     return this.categoryService.remove(id);
   }
 }
