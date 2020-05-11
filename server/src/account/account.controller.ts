@@ -22,7 +22,7 @@ export class AccountController {
   @ApiOkResponse({ description: 'Return account' })
   @ApiParam({ name: 'id', type: Number })
   @Get(':id')
-  async findOne(@Param('id') id) {
+  async findOne(@Param('id') id: number) {
     return await this.accountService.findOne(id);
   }
 
@@ -37,7 +37,7 @@ export class AccountController {
   @ApiCreatedResponse({ description: 'The article has been updated' })
   @ApiParam({ name: 'id', type: Number })
   @Put(':id')
-  async update(@Param('id') id, @Body() accountData: UpdateAccountDto) {
+  async update(@Param('id') id: number, @Body() accountData: UpdateAccountDto) {
     return this.accountService.update(id, accountData);
   }
 
@@ -45,7 +45,7 @@ export class AccountController {
   @ApiCreatedResponse({ description: 'The article has been deleted' })
   @ApiParam({ name: 'id', type: Number })
   @Delete(':id')
-  async remove(@Param('id') id) {
+  async remove(@Param('id') id: number) {
     return this.accountService.remove(id);
   }
 }

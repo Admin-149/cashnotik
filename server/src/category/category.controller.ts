@@ -22,7 +22,7 @@ export class CategoryController {
   @ApiOkResponse({ description: 'Return category' })
   @ApiParam({ name: 'id', type: Number })
   @Get(':id')
-  async findOne(@Param('id') id) {
+  async findOne(@Param('id') id: number) {
     return this.categoryService.findOne(id);
   }
 
