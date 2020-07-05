@@ -11,7 +11,7 @@ import { Account } from '../account/account.entity';
 
 @Entity()
 export class Operation {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
   @Column('decimal')
@@ -28,7 +28,7 @@ export class Operation {
 
   @ManyToOne(
     () => Category,
-    category => category.operations,
+    (category) => category.operations,
     {
       onDelete: 'CASCADE',
     },
@@ -37,7 +37,7 @@ export class Operation {
 
   @ManyToOne(
     () => Account,
-    account => account.operations,
+    (account) => account.operations,
     {
       onDelete: 'CASCADE',
     },

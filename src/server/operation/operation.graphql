@@ -1,0 +1,36 @@
+type Operation {
+    id: Int!
+    amount: Int!
+    date: Date!
+    createdAt: Date!
+    updatedAt: Date!
+    title: String
+}
+
+input CreateOperationInput {
+    accountId: Int!
+    amount: Int!
+    categoryId: Int!
+    date: Date!
+    title: String!
+}
+
+input UpdateOperationInput {
+    accountId: Int
+    amount: Int
+    categoryId: Int
+    date: Date
+    id: Int!
+    title: String
+}
+
+extend type Mutation {
+    createOperation(params: CreateOperationInput!): Operation!
+    updateOperation(params: UpdateOperationInput!): Operation!
+    deleteOperation(id: Int!): Operation!
+}
+
+extend type Query {
+    operations: [Operation]
+    operation(id: Int!): Operation
+}

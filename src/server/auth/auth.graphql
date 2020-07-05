@@ -1,0 +1,22 @@
+type User {
+    id: ID!
+    username: String!
+}
+
+type Token {
+    accessToken: String!
+}
+
+input AuthInput {
+    username: String!
+    password: String!
+}
+
+extend type Query {
+    me: User
+}
+
+extend type Mutation {
+    login(input: AuthInput): Token!
+    register(input: AuthInput): Token!
+}

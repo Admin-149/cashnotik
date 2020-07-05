@@ -7,6 +7,8 @@ import { OperationModule } from './operation/operation.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RootController } from './app.controller';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -25,10 +27,17 @@ import { RootController } from './app.controller';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    GraphQLModule.forRoot({
+      context: ({ req }) => ({ req }),
+      typePaths: ['./src/server/**/*.graphql'],
+      definitions: {
+        path: join(process.cwd(), 'src/server/graphql.ts'),
+      },
+    }),
     AccountModule,
+    AuthModule,
     CategoryModule,
     OperationModule,
-    AuthModule,
     UsersModule,
   ],
 

@@ -1,9 +1,8 @@
-import { Body, ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from './category.entity';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CreateCategoryInput, UpdateCategoryInput } from '../graphql';
 
 @Injectable()
 export class CategoryService {
@@ -20,22 +19,23 @@ export class CategoryService {
     return this.categoryRepository.findOne(id);
   }
 
-  async create(@Body() categoryData: CreateCategoryDto): Promise<Category> {
+  async create(input: CreateCategoryInput): Promise<Category> {
     const existCategory = await this.categoryRepository.findOne({
-      title: categoryData.title,
+      title: input.title,
     });
     if (existCategory) {
       throw new ConflictException('Category with same title already exist');
     }
 
     const category = new Category();
-    category.title = categoryData.title;
+    category.title = input.title;
 
     await this.categoryRepository.save(category);
     return category;
   }
 
-  async update(id: number, @Body() categoryData: UpdateCategoryDto): Promise<Category> {
+  async update(input: UpdateCategoryInput): Promise<Category> {
+    const { id, ...categoryData } = input;
     const categoryToUpdate = await this.categoryRepository.findOne({ id });
     const updatedCategory = Object.assign(categoryToUpdate, categoryData);
     await this.categoryRepository.save(updatedCategory);

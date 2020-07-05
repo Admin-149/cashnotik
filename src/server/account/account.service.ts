@@ -1,9 +1,8 @@
-import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Account } from './account.entity';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
+import { CreateAccountInput, UpdateAccountInput } from '../graphql';
 
 @Injectable()
 export class AccountService {
@@ -20,25 +19,31 @@ export class AccountService {
     return this.accountRepository.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async delete(id: number): Promise<void> {
     await this.accountRepository.delete(id);
   }
 
-  async create(@Body() accountData: CreateAccountDto): Promise<Account> {
-    const existAccount = await this.accountRepository.findOne({ title: accountData.title });
+  async create(input: CreateAccountInput): Promise<Account> {
+    const existAccount = await this.accountRepository.findOne({
+      title: input.title,
+    });
     if (existAccount) {
-      throw new HttpException('Account with same title already exist', HttpStatus.CONFLICT);
+      throw new HttpException(
+        'Account with same title already exist',
+        HttpStatus.CONFLICT,
+      );
     }
 
     const account = new Account();
-    account.title = accountData.title;
-    account.amount = accountData.amount;
+    account.title = input.title;
+    account.amount = input.amount;
 
     await this.accountRepository.save(account);
     return account;
   }
 
-  async update(id: number, @Body('account') accountData: UpdateAccountDto): Promise<Account> {
+  async update(input: UpdateAccountInput): Promise<Account> {
+    const { id, ...accountData } = input;
     const accountToUpdate = await this.accountRepository.findOne({ id });
     const updatedAccount = Object.assign(accountToUpdate, accountData);
     await this.accountRepository.save(updatedAccount);
