@@ -5,18 +5,9 @@ type User {
 
 type Token {
     accessToken: String!
-}
-
-input AuthInput {
-    username: String!
-    password: String!
+    accessTokenExpiry: Int!
 }
 
 extend type Query {
     me: User
-}
-
-extend type Mutation {
-    login(input: AuthInput): Token!
-    register(input: AuthInput): Token!
 }

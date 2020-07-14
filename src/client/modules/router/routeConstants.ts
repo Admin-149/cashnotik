@@ -1,4 +1,5 @@
 const RoutePath = {
+  app: '/app',
   login: '/login',
 };
 

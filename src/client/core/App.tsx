@@ -1,14 +1,13 @@
-import { CSSReset, ThemeProvider } from '@chakra-ui/core';
-import React from 'react';
-import AppRouter from './AppRouter';
+import React, { Suspense } from 'react';
+import AppRouter from '../modules/router/AppRouter';
+import AppProviders from './AppProviders';
 
-const App = () => {
-  return (
-    <ThemeProvider>
-      <CSSReset />
+const App = () => (
+  <AppProviders>
+    <Suspense fallback={<div />}>
       <AppRouter />
-    </ThemeProvider>
-  );
-};
+    </Suspense>
+  </AppProviders>
+);
 
 export default App;

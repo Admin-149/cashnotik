@@ -1,15 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import RoutePath from '../../core/routeConstants';
-import selectUserIsAuthenticated from '../../modules/user/useSelectors';
+import RoutePath from '../../modules/router/routeConstants';
 
 interface PrivateRouteProps {
   children: JSX.Element;
 }
 
 const PrivateRoute = ({ children, ...rest }: PrivateRouteProps) => {
-  const isAuthenticated = useSelector(selectUserIsAuthenticated);
+  const isAuthenticated = false;
 
   return (
     <Route

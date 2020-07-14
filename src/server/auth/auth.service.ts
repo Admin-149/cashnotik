@@ -12,9 +12,25 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<SafeUserDataDto> {
+  async handleLogin(username: string, password: string): Promise<Token> {
+    const user = await this.validateUser(username, password);
+    const accessToken = await this.generateJWTToken({
+      expiryInSeconds: 15 * 60,
+      secret: process.env.SECRET_ACCESS,
+      payload: user,
+    });
+    return {
+      accessToken: accessToken.token,
+      accessTokenExpiry: accessToken.expiry,
+    };
+  }
+
+  async validateUser(
+    username: string,
+    password: string,
+  ): Promise<SafeUserDataDto> {
     const user = await this.usersService.findOne(username);
-    if (user && (await argon2.verify(user.password, pass))) {
+    if (user && (await argon2.verify(user.password, password))) {
       const { password, ...result } = user;
       return result;
     } else {
@@ -22,10 +38,23 @@ export class AuthService {
     }
   }
 
-  async login(user: SafeUserDataDto): Promise<Token> {
-    const payload = { username: user.username, sub: user.id };
+  async generateJWTToken(params: {
+    payload: any;
+    expiryInSeconds: number;
+    secret: string;
+  }): Promise<{
+    token: string;
+    expiry: number;
+  }> {
+    const { expiryInSeconds, payload, secret } = params;
+    const expiry = Math.floor(Date.now() / 1000) + expiryInSeconds;
+    const token = this.jwtService.sign(payload, {
+      expiresIn: expiryInSeconds,
+      secret,
+    });
     return {
-      accessToken: this.jwtService.sign(payload),
+      token,
+      expiry,
     };
   }
 }

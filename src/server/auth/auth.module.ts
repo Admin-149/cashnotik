@@ -1,26 +1,15 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
-import { AuthResolver } from './auth.resolver';
+import { JwtAccessStrategy, JwtRefreshStrategy } from './jwt.strategy';
+import { AuthController } from './auth.controller';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      envFilePath: './.env',
-      isGlobal: true,
-    }),
-    UsersModule,
-    PassportModule,
-    JwtModule.register({
-      secret: process.env.SECRET,
-      signOptions: { expiresIn: '60s' },
-    }),
-  ],
+  imports: [UsersModule, PassportModule, JwtModule.register({})],
   exports: [AuthService],
-  providers: [AuthService, JwtStrategy, AuthResolver],
+  providers: [AuthService, JwtAccessStrategy, JwtRefreshStrategy],
+  controllers: [AuthController],
 })
 export class AuthModule {}

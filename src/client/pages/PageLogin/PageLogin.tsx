@@ -12,10 +12,10 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 
 const PageLogin = () => {
-  const { register, handleSubmit, errors } = useForm();
   const { t } = useTranslation('login');
-  // eslint-disable-next-line no-console
-  const onSubmit = () => console.log('Submit');
+  const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = (formData: { username: string; password: string }) => {};
 
   return (
     <Flex w="100vw" h="100vh" justify="center" align="center">
@@ -24,8 +24,8 @@ const PageLogin = () => {
           <FormControl isInvalid={!!errors.login}>
             <FormLabel htmlFor="login">{t('login')}</FormLabel>
             <Input
-              id="login"
-              name="login"
+              id="username"
+              name="username"
               placeholder={t('login')}
               ref={register({ required: true })}
               type="text"
