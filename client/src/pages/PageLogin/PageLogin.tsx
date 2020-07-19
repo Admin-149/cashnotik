@@ -11,21 +11,21 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 import useDataApi from '../../hooks/useDataApi';
-import { User } from '../../modules/auth/authTypes';
+import { AccessToken } from '../../modules/auth/authTypes';
 import { API_LOGIN } from '../../core/api';
 import { HttpMethod } from '../../core/appTypes';
 
 const PageLogin = () => {
   const { t } = useTranslation('login');
   const { register, handleSubmit, errors } = useForm();
-  const { refetch } = useDataApi<User>(
+  const { refetch } = useDataApi<AccessToken>(
     API_LOGIN,
     { method: HttpMethod.POST },
     { isPreventFetchOnRender: true },
   );
 
-  const onSubmit = (formData: { username: string; password: string }) => {
-    refetch(formData);
+  const onSubmit = async (formData: { username: string; password: string }) => {
+    await refetch(formData);
   };
 
   return (

@@ -13,7 +13,7 @@ import { join } from 'path';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: './.env',
+      envFilePath: '../.env',
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
@@ -29,9 +29,9 @@ import { join } from 'path';
     }),
     GraphQLModule.forRoot({
       context: ({ req }) => ({ req }),
-      typePaths: ['./src/server/**/*.graphql'],
+      typePaths: ['./src/**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), 'src/server/graphql.ts'),
+        path: join(process.cwd(), 'src/graphql.ts'),
       },
     }),
     AccountModule,

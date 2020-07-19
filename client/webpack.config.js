@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/client/index.tsx',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
@@ -33,7 +33,7 @@ module.exports = {
     ],
   },
 
-  plugins: [new HtmlWebpackPlugin({ template: './src/client/index.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
 
   devServer: {
     hot: true, // enable HMR on the server

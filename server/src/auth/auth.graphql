@@ -3,9 +3,8 @@ type User {
     username: String!
 }
 
-type Token {
+type AccessToken {
     accessToken: String!
-    accessTokenExpiry: Int!
 }
 
 extend type Query {

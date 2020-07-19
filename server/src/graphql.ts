@@ -76,9 +76,8 @@ export interface User {
     username: string;
 }
 
-export interface Token {
+export interface AccessToken {
     accessToken: string;
-    accessTokenExpiry: number;
 }
 
 export interface Category {
