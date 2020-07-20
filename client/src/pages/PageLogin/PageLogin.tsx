@@ -33,11 +33,11 @@ const PageLogin = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={5}>
           <FormControl isInvalid={!!errors.login}>
-            <FormLabel htmlFor="login">{t('login')}</FormLabel>
+            <FormLabel htmlFor="login">{t('username')}</FormLabel>
             <Input
               id="username"
               name="username"
-              placeholder={t('login')}
+              placeholder={t('username')}
               ref={register({ required: true })}
               type="text"
             />

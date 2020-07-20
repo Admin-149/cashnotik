@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './core/i18n';
+import './modules/translation/i18n';
 
 const render = () => {
   // eslint-disable-next-line global-require

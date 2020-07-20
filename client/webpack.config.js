@@ -1,3 +1,4 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -33,7 +34,17 @@ module.exports = {
     ],
   },
 
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, './src/modules/translation/locales'),
+          to: './locales',
+        },
+      ],
+    }),
+  ],
 
   devServer: {
     hot: true, // enable HMR on the server
