@@ -14,13 +14,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     method: HttpMethod.POST,
   });
 
-  return (
-    <>
-      {/*<span>{JSON.stringify(data)}</span>*/}
-      {/*<span>{error}</span>*/}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
 export default AuthProvider;
