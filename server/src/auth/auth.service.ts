@@ -30,11 +30,11 @@ export class AuthService {
 
   async generateTokens(payload, response: Response): Promise<Response> {
     const accessToken = this.jwtService.sign(payload,{
-      expiresIn: process.env.SECRET_ACCESS_EXPIRY,
+      expiresIn: parseInt(process.env.SECRET_ACCESS_EXPIRY),
       secret: process.env.SECRET_ACCESS,
     });
     const refreshToken = this.jwtService.sign(payload,{
-      expiresIn: process.env.SECRET_REFRESH_EXPIRY,
+      expiresIn: parseInt(process.env.SECRET_REFRESH_EXPIRY),
       secret: process.env.SECRET_REFRESH,
     });
     response.cookie('refresh_token', refreshToken, {

@@ -1,26 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import loadable from '@loadable/component';
-import Loader from '../../components/Loader/Loader';
-import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
-import RoutePath from './routeConstants';
+import AuthenticatedRouter from './AuthenticatedApp';
+import UnauthenticatedRouter from './UnauthenticatedApp';
+import { useAuth } from '../auth/AuthProvider';
 
-const PageLogin = loadable(() => import('../../pages/PageLogin/PageLogin'), {
-  fallback: <Loader />,
-});
+const AppRouter = () => {
+  const { authState } = useAuth();
 
-const AppRouter = () => (
-  <Router>
-    <Switch>
-      <Route path={RoutePath.login}>
-        <PageLogin />
-      </Route>
-
-      <PrivateRoute>
-        <div>Test</div>
-      </PrivateRoute>
-    </Switch>
-  </Router>
-);
+  return (
+    <>
+      {authState.username ? <AuthenticatedRouter /> : <UnauthenticatedRouter />}
+    </>
+  );
+};
 
 export default AppRouter;

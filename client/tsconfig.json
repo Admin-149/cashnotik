@@ -1,7 +1,11 @@
 {
   "extends": "../server/tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
     "noImplicitAny": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "experimentalDecorators": true
   }
 }

@@ -10,29 +10,23 @@ import {
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
-import useDataApi from '../../hooks/useDataApi';
-import { AccessToken } from '../../modules/auth/authTypes';
-import { API_LOGIN } from '../../core/api';
-import { HttpMethod } from '../../core/appTypes';
+import { LoginFormData } from '../../modules/auth/authTypes';
+import { useAuth } from '../../modules/auth/AuthProvider';
 
 const PageLogin = () => {
+  const { login } = useAuth();
   const { t } = useTranslation('login');
-  const { register, handleSubmit, errors } = useForm();
-  const { refetch } = useDataApi<AccessToken>(
-    API_LOGIN,
-    { method: HttpMethod.POST },
-    { isPreventFetchOnRender: true },
-  );
+  const { register, handleSubmit, errors } = useForm<LoginFormData>();
 
-  const onSubmit = async (formData: { username: string; password: string }) => {
-    await refetch(formData);
+  const onSubmit = async (formData: LoginFormData) => {
+    await login(formData);
   };
 
   return (
     <Flex w="100vw" h="100vh" justify="center" align="center">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={5}>
-          <FormControl isInvalid={!!errors.login}>
+          <FormControl isInvalid={!!errors.username}>
             <FormLabel htmlFor="login">{t('username')}</FormLabel>
             <Input
               id="username"
@@ -41,7 +35,7 @@ const PageLogin = () => {
               ref={register({ required: true })}
               type="text"
             />
-            {errors.login && (
+            {errors.username && (
               <FormErrorMessage>
                 {t(['loginUnknownRequired', 'loginRequired'])}
               </FormErrorMessage>

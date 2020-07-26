@@ -19,6 +19,7 @@ const useDataApi = <T>(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [endpointUrl] = useState(url);
+  const abortController = new AbortController();
 
   const allOptions: RequestInit = {
     method: HttpMethod.GET,
@@ -30,20 +31,20 @@ const useDataApi = <T>(
 
   const fetchDataFromApi = useCallback(
     async (body) => {
-      const currentBody = body ? JSON.stringify(body) : body;
       try {
+        const currentBody = body ? JSON.stringify(body) : body;
         setLoading(true);
-        const response = await fetch(endpointUrl, {
+        const res = await fetch(endpointUrl, {
           ...allOptions,
           body: currentBody,
-        }).then(async (res) => {
-          const fetchData = await res.json();
-          if (res.ok) {
-            return fetchData;
-          }
-          return Promise.reject(fetchData);
+          signal: abortController.signal,
         });
-        setData(response.data);
+        const fetchData = await res.json();
+        if (res.ok) {
+          setData(fetchData);
+        } else {
+          throw new Error(fetchData);
+        }
       } catch (e) {
         setError(e);
       } finally {
@@ -54,8 +55,10 @@ const useDataApi = <T>(
   );
 
   useEffect(() => {
-    if (!customOptions?.isPreventFetchOnRender)
+    if (!customOptions?.isPreventFetchOnRender) {
       fetchDataFromApi(requestOptions?.body);
+    }
+    return () => abortController.abort();
   }, []); // Runs once
 
   const refetch = useCallback(

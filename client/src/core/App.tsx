@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
-import AppRouter from '../modules/router/AppRouter';
+import React from 'react';
 import AppProviders from './AppProviders';
+import AppRouter from '../modules/router/AppRouter';
 
-const App = () => (
-  <AppProviders>
-    <Suspense fallback={<div />}>
+const App = () => {
+  return (
+    <AppProviders>
       <AppRouter />
-    </Suspense>
-  </AppProviders>
-);
+    </AppProviders>
+  );
+};
 
 export default App;

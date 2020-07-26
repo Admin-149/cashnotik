@@ -1,7 +1,11 @@
-import { AccessToken } from './authTypes';
+import { AuthState, AuthContextValue } from './authTypes';
 
-const initUser: AccessToken = {
-  accessToken: '',
+export const initAuthState: AuthState = {
+  username: '',
+  id: 0,
 };
 
-export default initUser;
+export const initAuthContextValue: AuthContextValue = {
+  authState: initAuthState,
+  login: () => (undefined as unknown) as Promise<void>,
+};

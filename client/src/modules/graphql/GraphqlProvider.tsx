@@ -12,7 +12,7 @@ import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import jwtDecode from 'jwt-decode';
 import { getAccessToken, setAccessToken } from '../auth/accessToken';
 import { HttpMethod } from '../../core/appTypes';
-import { API_REFRESH_TOKEN } from '../../core/api';
+import { API_REFRESH_TOKEN } from '../api/api';
 
 let logout: () => void;
 
@@ -24,7 +24,7 @@ const httpLink = new HttpLink({
 const logoutLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ extensions }) => {
-      if (extensions.code === 'invalid-jwt') {
+      if (extensions?.code === 'invalid-jwt') {
         logout();
       }
     });
