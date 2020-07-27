@@ -19,4 +19,5 @@ export interface LoginFormData {
 export interface AuthContextValue {
   authState: AuthState;
   login: (formaData: LoginFormData) => Promise<void>;
+  loading: boolean;
 }

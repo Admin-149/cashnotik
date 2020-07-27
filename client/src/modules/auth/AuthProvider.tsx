@@ -7,17 +7,15 @@ import React, {
 } from 'react';
 import jwtDecode from 'jwt-decode';
 import {
-  AccessToken,
   AuthState,
   TokenPayload,
   LoginFormData,
   AuthContextValue,
 } from './authTypes';
-import useDataApi from '../../hooks/useDataApi';
-import { API_REFRESH_TOKEN, API_LOGIN } from '../api/api';
-import { HttpMethod } from '../../core/appTypes';
 import { setAccessToken } from './accessToken';
 import { initAuthContextValue, initAuthState } from './authConstants';
+import { useRefreshToken, useLogin } from './authApi';
+import FullPageLoader from '../../components/Loader/FullPageLoader';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -27,22 +25,15 @@ const AuthContext = createContext<AuthContextValue>(initAuthContextValue);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authState, setAuthState] = useState<AuthState>(initAuthState);
-
-  const { data: refreshTokenData } = useDataApi<AccessToken>(
-    API_REFRESH_TOKEN,
-    {
-      credentials: 'same-origin',
-      method: HttpMethod.POST,
-    },
-  );
-
-  const { data: loginData, refetch: fetchLogin } = useDataApi<AccessToken>(
-    API_LOGIN,
-    {
-      method: HttpMethod.POST,
-    },
-    { isPreventFetchOnRender: true },
-  );
+  const {
+    data: refreshTokenData,
+    loading: loadingRefreshToken,
+  } = useRefreshToken();
+  const {
+    data: loginData,
+    refetch: fetchLogin,
+    loading: loadingLogin,
+  } = useLogin();
 
   useEffect(() => {
     const data = loginData || (refreshTokenData ?? null);
@@ -59,8 +50,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     await fetchLogin(formData);
   };
 
+  if (loadingRefreshToken) return <FullPageLoader />;
+
   return (
-    <AuthContext.Provider value={{ authState, login }}>
+    <AuthContext.Provider value={{ authState, login, loading: loadingLogin }}>
       {children}
     </AuthContext.Provider>
   );

@@ -12,9 +12,10 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 import { LoginFormData } from '../../modules/auth/authTypes';
 import { useAuth } from '../../modules/auth/AuthProvider';
+import FullPageLoader from '../../components/Loader/FullPageLoader';
 
 const PageLogin = () => {
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
   const { t } = useTranslation('login');
   const { register, handleSubmit, errors } = useForm<LoginFormData>();
 
@@ -23,45 +24,48 @@ const PageLogin = () => {
   };
 
   return (
-    <Flex w="100vw" h="100vh" justify="center" align="center">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={5}>
-          <FormControl isInvalid={!!errors.username}>
-            <FormLabel htmlFor="login">{t('username')}</FormLabel>
-            <Input
-              id="username"
-              name="username"
-              placeholder={t('username')}
-              ref={register({ required: true })}
-              type="text"
-            />
-            {errors.username && (
-              <FormErrorMessage>
-                {t(['loginUnknownRequired', 'loginRequired'])}
-              </FormErrorMessage>
-            )}
-          </FormControl>
+    <>
+      {loading && <FullPageLoader />}
+      <Flex w="100vw" h="100vh" justify="center" align="center">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={5}>
+            <FormControl isInvalid={!!errors.username}>
+              <FormLabel htmlFor="login">{t('username')}</FormLabel>
+              <Input
+                id="username"
+                name="username"
+                placeholder={t('username')}
+                ref={register({ required: true })}
+                type="text"
+              />
+              {errors.username && (
+                <FormErrorMessage>
+                  {t(['loginUnknownRequired', 'loginRequired'])}
+                </FormErrorMessage>
+              )}
+            </FormControl>
 
-          <FormControl isInvalid={!!errors.password}>
-            <FormLabel htmlFor="password">{t('password')}</FormLabel>
-            <Input
-              id="password"
-              name="password"
-              placeholder={t('password')}
-              ref={register({ required: true })}
-              type="password"
-            />
-            {errors.password && (
-              <FormErrorMessage>{t('passwordRequired')}</FormErrorMessage>
-            )}
-          </FormControl>
+            <FormControl isInvalid={!!errors.password}>
+              <FormLabel htmlFor="password">{t('password')}</FormLabel>
+              <Input
+                id="password"
+                name="password"
+                placeholder={t('password')}
+                ref={register({ required: true })}
+                type="password"
+              />
+              {errors.password && (
+                <FormErrorMessage>{t('passwordRequired')}</FormErrorMessage>
+              )}
+            </FormControl>
 
-          <Button variantColor="teal" type="submit">
-            {t('submit')}
-          </Button>
-        </Stack>
-      </form>
-    </Flex>
+            <Button variantColor="teal" type="submit">
+              {t('submit')}
+            </Button>
+          </Stack>
+        </form>
+      </Flex>
+    </>
   );
 };
 
