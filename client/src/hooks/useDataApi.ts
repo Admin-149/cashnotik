@@ -5,7 +5,7 @@ interface CustomRequestOptions {
   isPreventFetchOnRender?: boolean;
 }
 
-const useDataApi = <T>(
+export const useDataApi = <T>(
   url: string,
   requestOptions?: RequestInit,
   customOptions?: CustomRequestOptions,
@@ -70,5 +70,3 @@ const useDataApi = <T>(
 
   return { data, loading, error, refetch };
 };
-
-export default useDataApi;

@@ -84,8 +84,6 @@ interface GraphqlProviderProps {
   children: ReactNode;
 }
 
-const GraphqlProvider = ({ children }: GraphqlProviderProps) => {
+export const GraphqlProvider = ({ children }: GraphqlProviderProps) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
-
-export default GraphqlProvider;

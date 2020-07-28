@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 import { LoginFormData } from '../../modules/auth/authTypes';
 import { useAuth } from '../../modules/auth/AuthProvider';
-import FullPageLoader from '../../components/Loader/FullPageLoader';
+import { FullPageLoader } from '../../components/Loader/FullPageLoader';
 
 const PageLogin = () => {
   const { login, loading } = useAuth();

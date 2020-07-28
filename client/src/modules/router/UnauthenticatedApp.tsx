@@ -5,12 +5,12 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import RoutePath from './routeConstants';
-import FullPageLoader from '../../components/Loader/FullPageLoader';
+import { RoutePath } from './routeConstants';
+import { FullPageLoader } from '../../components/Loader/FullPageLoader';
 
 const PageLogin = lazy(() => import('../../pages/Login/PageLogin'));
 
-const UnauthenticatedRouter = () => (
+export const UnauthenticatedRouter = () => (
   <Suspense fallback={<FullPageLoader />}>
     <Router>
       <Switch>
@@ -20,5 +20,3 @@ const UnauthenticatedRouter = () => (
     </Router>
   </Suspense>
 );
-
-export default UnauthenticatedRouter;

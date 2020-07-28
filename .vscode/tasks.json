@@ -1,26 +1,33 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "npm",
-			"script": "db:start",
-			"problemMatcher": [],
-			"label": "npm: db:start",
-			"detail": "docker run --rm --name pg-docker --env-file .env -d -p 5432:5432 -v $(pwd)/../tmp/db/cashnotik:/var/lib/postgresql/data postgres"
-		},
-		{
-			"type": "npm",
-			"script": "server:start",
-			"problemMatcher": [],
-			"label": "npm: server:start",
-			"detail": "cd server && npm run start:dev"
-		},
-		{
-			"type": "npm",
-			"script": "client:start",
-			"problemMatcher": [],
-			"label": "npm: client:start",
-			"detail": "cd client && npm start"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "db:start",
+      "problemMatcher": [],
+      "label": "npm: db:start",
+      "detail": "docker run --rm --name pg-docker --env-file .env -d -p 5432:5432 -v $(pwd)/../tmp/db/cashnotik:/var/lib/postgresql/data postgres"
+    },
+    {
+      "type": "npm",
+      "script": "server:start",
+      "problemMatcher": [],
+      "label": "npm: server:start",
+      "detail": "cd server && npm run start:dev"
+    },
+    {
+      "type": "npm",
+      "script": "client:start",
+      "problemMatcher": [],
+      "label": "npm: client:start",
+      "detail": "cd client && npm start"
+    },
+    {
+      "type": "npm",
+      "script": "db:stop",
+      "problemMatcher": [],
+      "label": "npm: db:stop",
+      "detail": "docker stop pg-docker"
+    }
+  ]
 }

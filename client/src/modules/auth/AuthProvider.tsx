@@ -15,7 +15,7 @@ import {
 import { setAccessToken } from './accessToken';
 import { initAuthContextValue, initAuthState } from './authConstants';
 import { useRefreshToken, useLogin } from './authApi';
-import FullPageLoader from '../../components/Loader/FullPageLoader';
+import { FullPageLoader } from '../../components/Loader/FullPageLoader';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -23,7 +23,7 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextValue>(initAuthContextValue);
 
-const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authState, setAuthState] = useState<AuthState>(initAuthState);
   const {
     data: refreshTokenData,
@@ -60,5 +60,3 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-
-export default AuthProvider;

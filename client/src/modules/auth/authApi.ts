@@ -1,4 +1,4 @@
-import useDataApi from '../../hooks/useDataApi';
+import { useDataApi } from '../../hooks/useDataApi';
 import { AccessToken } from './authTypes';
 import { API_REFRESH_TOKEN, API_LOGIN } from '../api/api';
 import { HttpMethod } from '../../core/appTypes';

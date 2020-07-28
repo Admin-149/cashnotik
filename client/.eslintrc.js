@@ -40,5 +40,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
     'no-shadow': 'off',
+    'import/prefer-default-export': 'off',
   },
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import AppProviders from './AppProviders';
-import AppRouter from '../modules/router/AppRouter';
+import { AppProviders } from './AppProviders';
+import { AppRouter } from '../modules/router/AppRouter';
 
 const App = () => {
   return (
