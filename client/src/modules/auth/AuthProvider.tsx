@@ -25,9 +25,12 @@ const AuthContext = createContext<AuthContextValue>(initAuthContextValue);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authState, setAuthState] = useState<AuthState>(initAuthState);
+  const [initLoad, setInitLoad] = useState<boolean>(true);
+
   const {
     data: refreshTokenData,
     loading: loadingRefreshToken,
+    error,
   } = useRefreshToken();
   const {
     data: loginData,
@@ -43,14 +46,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const decoded = jwtDecode<TokenPayload>(accessToken);
       const { iat, exp, ...payload } = decoded;
       setAuthState(payload);
+      setInitLoad(false);
     }
   }, [loginData, refreshTokenData]);
+
+  useEffect(() => {
+    if (error) setInitLoad(false);
+  }, [error]);
 
   const login = async (formData: LoginFormData) => {
     await fetchLogin(formData);
   };
 
-  if (loadingRefreshToken) return <FullPageLoader />;
+  if (loadingRefreshToken || initLoad) return <FullPageLoader />;
 
   return (
     <AuthContext.Provider value={{ authState, login, loading: loadingLogin }}>

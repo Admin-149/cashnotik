@@ -7,17 +7,19 @@ import {
 } from 'react-router-dom';
 import { RoutePath } from './routeConstants';
 import { FullPageLoader } from '../../components/Loader/FullPageLoader';
+import { Header } from '../header/Header';
 
 const PageHome = lazy(() => import('../../pages/Home/PageHome'));
 
 export const AuthenticatedRouter = () => (
   <Suspense fallback={<FullPageLoader />}>
     <Router>
+      <Header />
       <Switch>
         <Route path={RoutePath.login}>
-          <Redirect to={RoutePath.root} />
+          <Redirect to={RoutePath.accounts} />
         </Route>
-        <Route path={RoutePath.root} component={PageHome} />
+        <Route path={RoutePath.root} exact component={PageHome} />
       </Switch>
     </Router>
   </Suspense>

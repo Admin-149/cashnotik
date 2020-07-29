@@ -1,5 +1,7 @@
-export const RoutePath = {
-  root: '/',
-  app: '/app',
-  login: '/login',
-};
+export enum RoutePath {
+  accounts = '/accounts',
+  root = '/',
+  login = '/login',
+  operations = '/operations',
+  reports = '/reports',
+}

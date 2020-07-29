@@ -12,7 +12,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
     load: 'languageOnly',
-    ns: ['login'],
+    ns: ['common'],
     interpolation: {
       escapeValue: false,
     },

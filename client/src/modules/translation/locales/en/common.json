@@ -1,0 +1,14 @@
+{
+  "auth": {
+    "fieldRequired": "Field is required",
+    "login": "Submit",
+    "logout": "Logout",
+    "password": "Password",
+    "username": "Username"
+  },
+  "pages": {
+    "accounts": "Accounts",
+    "operations": "Operations",
+    "reports": "Reports"
+  }
+}

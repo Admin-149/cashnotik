@@ -1,0 +1,14 @@
+{
+  "auth": {
+    "fieldRequired": "Поле обязательно для заполнения",
+    "login": "Войти",
+    "logout": "Выйти",
+    "password": "Пароль",
+    "username": "Имя пользователя"
+  },
+  "pages": {
+    "accounts": "Счета",
+    "operations": "Операции",
+    "reports": "Отчеты"
+  }
+}
