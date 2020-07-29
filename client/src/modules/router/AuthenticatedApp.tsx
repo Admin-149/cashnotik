@@ -17,7 +17,7 @@ export const AuthenticatedRouter = () => (
       <Header />
       <Switch>
         <Route path={RoutePath.login}>
-          <Redirect to={RoutePath.accounts} />
+          <Redirect to={RoutePath.operations} />
         </Route>
         <Route path={RoutePath.root} exact component={PageHome} />
       </Switch>

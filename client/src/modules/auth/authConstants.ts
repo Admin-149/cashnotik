@@ -8,5 +8,6 @@ export const initAuthState: AuthState = {
 export const initAuthContextValue: AuthContextValue = {
   authState: initAuthState,
   login: () => (undefined as unknown) as Promise<void>,
+  logout: () => (undefined as unknown) as Promise<void>,
   loading: false,
 };

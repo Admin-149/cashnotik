@@ -14,7 +14,7 @@ import {
 } from './authTypes';
 import { setAccessToken } from './accessToken';
 import { initAuthContextValue, initAuthState } from './authConstants';
-import { useRefreshToken, useLogin } from './authApi';
+import { useRefreshToken, useLogin, useLogout } from './authApi';
 import { FullPageLoader } from '../../components/Loader/FullPageLoader';
 
 interface AuthProviderProps {
@@ -25,6 +25,7 @@ const AuthContext = createContext<AuthContextValue>(initAuthContextValue);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [authState, setAuthState] = useState<AuthState>(initAuthState);
+  const [loading, setLoading] = useState<boolean>(false);
   const [initLoad, setInitLoad] = useState<boolean>(true);
 
   const {
@@ -37,6 +38,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     refetch: fetchLogin,
     loading: loadingLogin,
   } = useLogin();
+  const { loading: loadingLogout, refetch: fetchLogout } = useLogout();
 
   useEffect(() => {
     const data = loginData || (refreshTokenData ?? null);
@@ -54,14 +56,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if (error) setInitLoad(false);
   }, [error]);
 
-  const login = async (formData: LoginFormData) => {
-    await fetchLogin(formData);
+  useEffect(() => {
+    if (loadingLogin || loadingRefreshToken || loadingLogout) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [loadingLogin, loadingRefreshToken, loadingLogout]);
+
+  const login = (formData: LoginFormData) => fetchLogin(formData);
+
+  const logout = async () => {
+    await fetchLogout();
+    setAccessToken('');
+    setAuthState(initAuthState);
   };
 
   if (loadingRefreshToken || initLoad) return <FullPageLoader />;
 
   return (
-    <AuthContext.Provider value={{ authState, login, loading: loadingLogin }}>
+    <AuthContext.Provider value={{ authState, login, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );

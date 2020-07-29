@@ -13,7 +13,7 @@ export const useDataApi = <T>(
   data: T | null;
   loading: boolean;
   error: any;
-  refetch: (body: any) => Promise<void>;
+  refetch: (body?: any) => Promise<void>;
 } => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export const useDataApi = <T>(
   };
 
   const fetchDataFromApi = useCallback(
-    async (body) => {
+    async (body?) => {
       try {
         const currentBody = body ? JSON.stringify(body) : body;
         setLoading(true);
@@ -62,7 +62,7 @@ export const useDataApi = <T>(
   }, []); // Runs once
 
   const refetch = useCallback(
-    (body) => {
+    (body?) => {
       return fetchDataFromApi(body);
     },
     [url, requestOptions],

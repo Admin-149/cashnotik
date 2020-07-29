@@ -13,15 +13,29 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async handleLogin(username: string, password: string, response: Response): Promise<Response> {
+  async handleLogin(
+    username: string,
+    password: string,
+    response: Response,
+  ): Promise<Response> {
     const user = await this.validateUser(username, password);
     return this.generateTokens(user, response);
   }
 
-  async handleRefreshToken(request: Request, response: Response): Promise<Response> {
+  async handleLogout(response: Response): Promise<Response> {
+    response.clearCookie('refresh_token');
+    return response.send();
+  }
+
+  async handleRefreshToken(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const refreshToken = refreshTokenExtractor(request);
     try {
-      const { exp, ...payload }  = await this.jwtService.verify(refreshToken, {secret: process.env.SECRET_REFRESH});
+      const { exp, ...payload } = await this.jwtService.verify(refreshToken, {
+        secret: process.env.SECRET_REFRESH,
+      });
       return this.generateTokens(payload, response);
     } catch (e) {
       throw new UnauthorizedException();
@@ -29,18 +43,18 @@ export class AuthService {
   }
 
   async generateTokens(payload, response: Response): Promise<Response> {
-    const accessToken = this.jwtService.sign(payload,{
+    const accessToken = this.jwtService.sign(payload, {
       expiresIn: parseInt(process.env.SECRET_ACCESS_EXPIRY),
       secret: process.env.SECRET_ACCESS,
     });
-    const refreshToken = this.jwtService.sign(payload,{
+    const refreshToken = this.jwtService.sign(payload, {
       expiresIn: parseInt(process.env.SECRET_REFRESH_EXPIRY),
       secret: process.env.SECRET_REFRESH,
     });
     response.cookie('refresh_token', refreshToken, {
       maxAge: parseInt(process.env.SECRET_REFRESH_EXPIRY) * 1000,
       httpOnly: true,
-      sameSite: true
+      sameSite: true,
     });
     return response.send({ accessToken });
   }

@@ -10,9 +10,14 @@ export class AuthController {
   async login(
     @Body('username') username: string,
     @Body('password') password: string,
-    @Res() response: Response
+    @Res() response: Response,
   ) {
     return this.authService.handleLogin(username, password, response);
+  }
+
+  @Post('logout')
+  async logout(@Res() response: Response) {
+    return this.authService.handleLogout(response);
   }
 
   @Post('refresh-token')
