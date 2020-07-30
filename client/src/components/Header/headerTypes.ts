@@ -1,4 +1,4 @@
-import { RoutePath } from '../router/routeConstants';
+import { RoutePath } from '../../modules/router/routeConstants';
 
 export interface TNavItem {
   route: RoutePath;

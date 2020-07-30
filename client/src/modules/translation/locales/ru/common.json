@@ -8,6 +8,7 @@
   },
   "pages": {
     "accounts": "Счета",
+    "categories": "Категории",
     "operations": "Операции",
     "reports": "Отчет"
   }

@@ -8,6 +8,7 @@
   },
   "pages": {
     "accounts": "Accounts",
+    "categories": "Categories",
     "operations": "Operations",
     "reports": "Report"
   }

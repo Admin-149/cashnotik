@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { navItems } from './headerConstants';
 import { TNavItem } from './headerTypes';
-import { useAuth } from '../auth/AuthProvider';
+import { useAuth } from '../../modules/auth/AuthProvider';
 
 export const Header = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);

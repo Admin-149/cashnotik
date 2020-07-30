@@ -1,5 +1,5 @@
 import { TNavItem } from './headerTypes';
-import { RoutePath } from '../router/routeConstants';
+import { RoutePath } from '../../modules/router/routeConstants';
 
 export const navItems: TNavItem[] = [
   {
@@ -9,6 +9,10 @@ export const navItems: TNavItem[] = [
   {
     route: RoutePath.accounts,
     translation: 'pages.accounts',
+  },
+  {
+    route: RoutePath.categories,
+    translation: 'pages.categories',
   },
   {
     route: RoutePath.reports,
