@@ -1,9 +1,9 @@
 {
   "accounts": {
-    "amountPlaceholder": "Введите количество на счете",
-    "amountLabel": "Количество денег на счете",
     "alertDeleteText": "Вы уверены, что хотите удалить счет",
     "alertDeleteTitle": "Удалить счет",
+    "amountPlaceholder": "Введите количество на счете",
+    "amountLabel": "Количество денег на счете",
     "createButton": "Создать счет",
     "createTitle": "Создание счета",
     "titleLabel": "Название счета",

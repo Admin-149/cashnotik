@@ -12,7 +12,7 @@ import { Reference, useMutation } from '@apollo/client';
 import { formatBalance } from '../../../lib/formatText/formatText';
 import { TAccount } from '../accountTypes';
 import { DELETE_ACCOUNT } from '../accountsQueries';
-import { ModalPopup } from '../../../components/Modal/Modal';
+import { AlertMessage } from '../../../components/Modal/AlertMessage';
 
 export const Account = ({ amount, title, id }: TAccount) => {
   const { t } = useTranslation('common');
@@ -36,7 +36,7 @@ export const Account = ({ amount, title, id }: TAccount) => {
     },
   });
 
-  const onConfirmClick = async () => {
+  const onmDeleteConfirm = async () => {
     await deleteAccount();
     onClose();
   };
@@ -51,9 +51,14 @@ export const Account = ({ amount, title, id }: TAccount) => {
       shadow="md"
       borderWidth="1px"
     >
-      <ModalPopup isOpen={isOpen} onClose={onClose} onConfirm={onConfirmClick}>
-        {t('accounts.modalText')} <b>{title}</b>?
-      </ModalPopup>
+      <AlertMessage
+        title={t('accounts.alertDeleteTitle')}
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={onmDeleteConfirm}
+      >
+        {t('accounts.alertDeleteText')} <b>{title}</b>?
+      </AlertMessage>
       <div>
         <Heading size="md">{title}</Heading>
         <Text>{`${formatBalance(amount)} ${t('currency')}`}</Text>
