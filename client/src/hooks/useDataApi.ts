@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { HttpMethod } from '../core/appTypes';
+import { HttpMethod } from '../app/appTypes';
 
 interface CustomRequestOptions {
   isPreventFetchOnRender?: boolean;
@@ -51,7 +51,7 @@ export const useDataApi = <T>(
         setLoading(false);
       }
     },
-    [url, requestOptions],
+    [endpointUrl, allOptions, abortController.signal],
   );
 
   useEffect(() => {
@@ -59,13 +59,14 @@ export const useDataApi = <T>(
       fetchDataFromApi(requestOptions?.body);
     }
     return () => abortController.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Runs once
 
   const refetch = useCallback(
     (body?) => {
       return fetchDataFromApi(body);
     },
-    [url, requestOptions],
+    [fetchDataFromApi],
   );
 
   return { data, loading, error, refetch };

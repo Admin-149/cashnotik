@@ -19,8 +19,16 @@ export class AccountService {
     return this.accountRepository.findOne(id);
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: number): Promise<Account> {
+    const existAccount = await this.accountRepository.findOne(id);
+    if (!existAccount) {
+      throw new HttpException(
+        "Account with provided id doesn't exist",
+        HttpStatus.CONFLICT,
+      );
+    }
     await this.accountRepository.delete(id);
+    return existAccount;
   }
 
   async create(input: CreateAccountInput): Promise<Account> {

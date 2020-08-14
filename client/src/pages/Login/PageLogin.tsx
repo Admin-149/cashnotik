@@ -39,7 +39,7 @@ const PageLogin = () => {
                 type="text"
               />
               {errors.username && (
-                <FormErrorMessage>{t('auth.fieldRequired')}</FormErrorMessage>
+                <FormErrorMessage>{t('form.fieldRequired')}</FormErrorMessage>
               )}
             </FormControl>
 
@@ -53,11 +53,11 @@ const PageLogin = () => {
                 type="password"
               />
               {errors.password && (
-                <FormErrorMessage>{t('auth.fieldRequired')}</FormErrorMessage>
+                <FormErrorMessage>{t('form.fieldRequired')}</FormErrorMessage>
               )}
             </FormControl>
 
-            <Button variantColor="teal" type="submit">
+            <Button variantColor="blue" type="submit">
               {t('auth.login')}
             </Button>
           </Stack>

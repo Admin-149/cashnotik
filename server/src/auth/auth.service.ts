@@ -33,9 +33,12 @@ export class AuthService {
   ): Promise<Response> {
     const refreshToken = refreshTokenExtractor(request);
     try {
-      const { exp, ...payload } = await this.jwtService.verify(refreshToken, {
-        secret: process.env.SECRET_REFRESH,
-      });
+      const { exp, iat, ...payload } = await this.jwtService.verify(
+        refreshToken,
+        {
+          secret: process.env.SECRET_REFRESH,
+        },
+      );
       return this.generateTokens(payload, response);
     } catch (e) {
       throw new UnauthorizedException();
@@ -44,15 +47,15 @@ export class AuthService {
 
   async generateTokens(payload, response: Response): Promise<Response> {
     const accessToken = this.jwtService.sign(payload, {
-      expiresIn: parseInt(process.env.SECRET_ACCESS_EXPIRY),
+      expiresIn: parseInt(process.env.SECRET_ACCESS_EXPIRY_SEC),
       secret: process.env.SECRET_ACCESS,
     });
     const refreshToken = this.jwtService.sign(payload, {
-      expiresIn: parseInt(process.env.SECRET_REFRESH_EXPIRY),
+      expiresIn: parseInt(process.env.SECRET_REFRESH_EXPIRY_SEC),
       secret: process.env.SECRET_REFRESH,
     });
     response.cookie('refresh_token', refreshToken, {
-      maxAge: parseInt(process.env.SECRET_REFRESH_EXPIRY) * 1000,
+      maxAge: parseInt(process.env.SECRET_REFRESH_EXPIRY_SEC) * 1000,
       httpOnly: true,
       sameSite: true,
     });

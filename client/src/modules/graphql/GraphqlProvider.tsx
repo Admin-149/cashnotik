@@ -11,7 +11,7 @@ import { onError } from '@apollo/client/link/error';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import jwtDecode from 'jwt-decode';
 import { getAccessToken, setAccessToken } from '../auth/accessToken';
-import { HttpMethod } from '../../core/appTypes';
+import { HttpMethod } from '../../app/appTypes';
 import { API_REFRESH_TOKEN } from '../api/api';
 
 let logout: () => void;
@@ -58,10 +58,7 @@ const refreshMiddleware = new TokenRefreshLink({
 
     try {
       const { exp } = jwtDecode(token);
-      if (Date.now() >= exp * 1000) {
-        return false;
-      }
-      return true;
+      return Date.now() < exp * 1000;
     } catch {
       return false;
     }

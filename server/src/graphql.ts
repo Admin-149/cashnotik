@@ -60,9 +60,9 @@ export interface IQuery {
 }
 
 export interface IMutation {
-    createAccount(params: CreateAccountInput): Account | Promise<Account>;
+    createAccount(input: CreateAccountInput): Account | Promise<Account>;
     deleteAccount(id: number): Account | Promise<Account>;
-    updateAccount(params: UpdateAccountInput): Account | Promise<Account>;
+    updateAccount(input: UpdateAccountInput): Account | Promise<Account>;
     createCategory(input: CreateCategoryInput): Category | Promise<Category>;
     updateCategory(input: UpdateCategoryInput): Category | Promise<Category>;
     deleteCategory(id: number): Category | Promise<Category>;

@@ -4,7 +4,7 @@ import './modules/translation/i18n';
 
 const render = () => {
   // eslint-disable-next-line global-require
-  const App = require('./core/App').default;
+  const App = require('./app/App').default;
 
   ReactDOM.render(<App />, document.getElementById('root'));
 };
@@ -12,5 +12,5 @@ const render = () => {
 render();
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./core/App', render);
+  module.hot.accept('./app/App', render);
 }

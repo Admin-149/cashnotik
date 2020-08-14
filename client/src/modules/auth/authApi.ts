@@ -1,7 +1,7 @@
 import { useDataApi } from '../../hooks/useDataApi';
 import { AccessToken } from './authTypes';
 import { API_REFRESH_TOKEN, API_LOGIN, API_LOGOUT } from '../api/api';
-import { HttpMethod } from '../../core/appTypes';
+import { HttpMethod } from '../../app/appTypes';
 
 export const useRefreshToken = () =>
   useDataApi<AccessToken>(API_REFRESH_TOKEN, {

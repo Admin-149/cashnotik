@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tabs, TabList, Tab, Button } from '@chakra-ui/core';
+import { Tabs, TabList, Tab, Text, Button, Flex } from '@chakra-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { navItems } from './headerConstants';
@@ -10,7 +10,7 @@ export const Header = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const history = useHistory();
   const { pathname } = useLocation();
-  const { logout } = useAuth();
+  const { authState, logout } = useAuth();
 
   useEffect(() => {
     navItems.forEach((item, index) => {
@@ -25,22 +25,25 @@ export const Header = () => {
 
   const { t } = useTranslation('common');
   return (
-    <Tabs align="center" index={tabIndex} onChange={handleTabsChange}>
+    <Tabs
+      align="center"
+      index={tabIndex}
+      onChange={handleTabsChange}
+      position="fixed"
+      width="100%"
+      zIndex={1}
+    >
       <TabList>
         {navItems.map((item: TNavItem) => (
           <Tab key={item.translation}>{t(item.translation)}</Tab>
         ))}
       </TabList>
-      <Button
-        variantColor="teal"
-        size="sm"
-        position="absolute"
-        top="4px"
-        right="10px"
-        onClick={logout}
-      >
-        {t('auth.logout')}
-      </Button>
+      <Flex position="absolute" top="4px" right="10px" alignItems="center">
+        <Text>{authState.username ?? ''}</Text>
+        <Button variantColor="blue" size="sm" onClick={logout} ml="10px">
+          {t('auth.logout')}
+        </Button>
+      </Flex>
     </Tabs>
   );
 };

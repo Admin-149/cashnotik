@@ -1,27 +1,27 @@
 type Account {
-    amount: Int!
-    id: Int!
-    title: String!
+  amount: Int!
+  id: Int!
+  title: String!
 }
 
 extend type Query {
-    account(id: Int!): Account
-    accounts: [Account]!
+  account(id: Int!): Account
+  accounts: [Account]!
 }
 
 input CreateAccountInput {
-    amount: Int!
-    title: String!
+  amount: Int!
+  title: String!
 }
 
 input UpdateAccountInput {
-    amount: Int
-    id: Int!
-    title: String
+  amount: Int
+  id: Int!
+  title: String
 }
 
 extend type Mutation {
-    createAccount(params: CreateAccountInput!): Account!
-    deleteAccount(id: Int!): Account!
-    updateAccount(params: UpdateAccountInput!): Account!
+  createAccount(input: CreateAccountInput!): Account!
+  deleteAccount(id: Int!): Account!
+  updateAccount(input: UpdateAccountInput!): Account!
 }

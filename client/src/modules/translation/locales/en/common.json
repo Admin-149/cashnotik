@@ -1,11 +1,21 @@
 {
-  "auth": {
+  "accounts": {
+    "createButton": "Create account",
+    "titlePlaceholder": "Account title",
+    "amountPlaceholder": "Account amount"
+  },
+  "form": {
+    "cancelButton": "Cancel",
     "fieldRequired": "Field is required",
+    "saveButton": "Save"
+  },
+  "auth": {
     "login": "Submit",
     "logout": "Logout",
     "password": "Password",
     "username": "Username"
   },
+  "currency": "₽",
   "pages": {
     "accounts": "Accounts",
     "categories": "Categories",

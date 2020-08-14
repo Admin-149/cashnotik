@@ -1,11 +1,21 @@
 {
-  "auth": {
+  "accounts": {
+    "createButton": "Создать счет",
+    "titlePlaceholder": "Название счета",
+    "amountPlaceholder": "Количество на счете"
+  },
+  "form": {
+    "cancelButton": "Отмена",
     "fieldRequired": "Поле обязательно для заполнения",
+    "saveButton": "Сохранить"
+  },
+  "auth": {
     "login": "Войти",
     "logout": "Выйти",
     "password": "Пароль",
     "username": "Имя пользователя"
   },
+  "currency": "₽",
   "pages": {
     "accounts": "Счета",
     "categories": "Категории",
