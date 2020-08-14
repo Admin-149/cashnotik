@@ -1,12 +1,12 @@
 import {
   Heading,
-  IconButton,
   Box,
   Text,
   PseudoBox,
   useDisclosure,
+  CloseButton,
 } from '@chakra-ui/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Reference, useMutation } from '@apollo/client';
 import { formatBalance } from '../../../lib/formatText/formatText';
@@ -58,13 +58,7 @@ export const Account = ({ amount, title, id }: TAccount) => {
         <Heading size="md">{title}</Heading>
         <Text>{`${formatBalance(amount)} ${t('currency')}`}</Text>
       </div>
-      <IconButton
-        size="xs"
-        variant="ghost"
-        aria-label="Delete account"
-        icon="close"
-        onClick={onOpen}
-      />
+      <CloseButton size="sm" onClick={onOpen} />
     </PseudoBox>
   );
 };

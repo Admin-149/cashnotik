@@ -1,9 +1,13 @@
 {
   "accounts": {
-    "modalText": "Are you sure you want to delete the account",
+    "alertDeleteTitle": "Delete account",
+    "amountLabel": "Account amount",
+    "amountPlaceholder": "Please enter account amount",
     "createButton": "Create account",
-    "titlePlaceholder": "Account title",
-    "amountPlaceholder": "Account amount"
+    "createTitle": "Create account",
+    "modalText": "Are you sure you want to delete the account",
+    "titleLabel": "Account title",
+    "titlePlaceholder": "Please type account title"
   },
   "attention": "Attention",
   "form": {

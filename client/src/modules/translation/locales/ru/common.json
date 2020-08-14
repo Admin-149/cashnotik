@@ -1,9 +1,13 @@
 {
   "accounts": {
-    "modalText": "Вы уверены, что хотите удалить счет",
+    "amountPlaceholder": "Введите количество на счете",
+    "amountLabel": "Количество денег на счете",
+    "alertDeleteText": "Вы уверены, что хотите удалить счет",
+    "alertDeleteTitle": "Удалить счет",
     "createButton": "Создать счет",
-    "titlePlaceholder": "Название счета",
-    "amountPlaceholder": "Количество на счете"
+    "createTitle": "Создание счета",
+    "titleLabel": "Название счета",
+    "titlePlaceholder": "Введите название счета"
   },
   "attention": "Внимание",
   "form": {

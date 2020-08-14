@@ -26,7 +26,6 @@ export const Header = () => {
   const { t } = useTranslation('common');
   return (
     <Tabs
-      align="center"
       index={tabIndex}
       onChange={handleTabsChange}
       position="fixed"

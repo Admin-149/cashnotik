@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState } from 'react';
-import { Button } from '@chakra-ui/core';
+import React from 'react';
+import { Button, useDisclosure } from '@chakra-ui/core';
 import { useMutation } from '@apollo/client';
 import { TAccount, TCreateAccountInput } from '../accountTypes';
 import { CREATE_ACCOUNT } from '../accountsQueries';
@@ -12,7 +12,7 @@ export interface TAccountCreatePanelFormData {
 }
 
 export const AccountCreatePanel = () => {
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation('common');
 
   const [createAccount] = useMutation<
@@ -36,17 +36,19 @@ export const AccountCreatePanel = () => {
         input: { amount: parseFloat(formData.amount), title: formData.title },
       },
     });
-    setIsEditMode(false);
+    onClose();
   };
 
-  return isEditMode ? (
-    <AccountCreateSubmitForm
-      onSubmit={onSubmit}
-      onCancel={() => setIsEditMode(false)}
-    />
-  ) : (
-    <Button onClick={() => setIsEditMode(true)} variantColor="blue">
-      {t('accounts.createButton')}
-    </Button>
+  return (
+    <>
+      <Button leftIcon="add" onClick={onOpen} variantColor="blue">
+        {t('accounts.createButton')}
+      </Button>
+      <AccountCreateSubmitForm
+        isOpen={isOpen}
+        onSubmit={onSubmit}
+        onCancel={onClose}
+      />
+    </>
   );
 };
