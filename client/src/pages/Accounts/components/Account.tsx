@@ -1,14 +1,22 @@
-import { Heading, IconButton, Box, Text, PseudoBox } from '@chakra-ui/core';
+import {
+  Heading,
+  IconButton,
+  Box,
+  Text,
+  PseudoBox,
+  useDisclosure,
+} from '@chakra-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Reference, useMutation } from '@apollo/client';
 import { formatBalance } from '../../../lib/formatText/formatText';
 import { TAccount } from '../accountTypes';
 import { DELETE_ACCOUNT } from '../accountsQueries';
+import { ModalPopup } from '../../../components/Modal/Modal';
 
 export const Account = ({ amount, title, id }: TAccount) => {
-  const [isHover, setHover] = useState<boolean>(false);
   const { t } = useTranslation('common');
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [deleteAccount] = useMutation<
     { deleteAccount: Pick<TAccount, 'id'> },
@@ -28,10 +36,13 @@ export const Account = ({ amount, title, id }: TAccount) => {
     },
   });
 
+  const onConfirmClick = async () => {
+    await deleteAccount();
+    onClose();
+  };
+
   return (
     <PseudoBox
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
       as={Box}
       display="flex"
       justifyContent="space-between"
@@ -40,18 +51,20 @@ export const Account = ({ amount, title, id }: TAccount) => {
       shadow="md"
       borderWidth="1px"
     >
+      <ModalPopup isOpen={isOpen} onClose={onClose} onConfirm={onConfirmClick}>
+        {t('accounts.modalText')} <b>{title}</b>?
+      </ModalPopup>
       <div>
         <Heading size="md">{title}</Heading>
         <Text>{`${formatBalance(amount)} ${t('currency')}`}</Text>
       </div>
-      {isHover && (
-        <IconButton
-          variant="ghost"
-          aria-label="Delete account"
-          icon="delete"
-          onClick={() => deleteAccount()}
-        />
-      )}
+      <IconButton
+        size="xs"
+        variant="ghost"
+        aria-label="Delete account"
+        icon="close"
+        onClick={onOpen}
+      />
     </PseudoBox>
   );
 };

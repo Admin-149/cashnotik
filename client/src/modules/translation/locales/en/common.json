@@ -1,13 +1,16 @@
 {
   "accounts": {
+    "modalText": "Are you sure you want to delete the account",
     "createButton": "Create account",
     "titlePlaceholder": "Account title",
     "amountPlaceholder": "Account amount"
   },
+  "attention": "Attention",
   "form": {
     "cancelButton": "Cancel",
     "fieldRequired": "Field is required",
-    "saveButton": "Save"
+    "saveButton": "Save",
+    "confirmButton": "Confirm"
   },
   "auth": {
     "login": "Submit",

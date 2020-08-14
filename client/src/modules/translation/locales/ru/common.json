@@ -1,13 +1,16 @@
 {
   "accounts": {
+    "modalText": "Вы уверены, что хотите удалить счет",
     "createButton": "Создать счет",
     "titlePlaceholder": "Название счета",
     "amountPlaceholder": "Количество на счете"
   },
+  "attention": "Внимание",
   "form": {
     "cancelButton": "Отмена",
     "fieldRequired": "Поле обязательно для заполнения",
-    "saveButton": "Сохранить"
+    "saveButton": "Сохранить",
+    "confirmButton": "Подтвердить"
   },
   "auth": {
     "login": "Войти",
