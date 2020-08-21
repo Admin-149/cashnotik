@@ -1,0 +1,15 @@
+{
+  "name": "GraphQL Schema",
+  "includes": ["./server/src/**/*.graphql", "./client/src/**/*.graphql"],
+  "extensions": {
+    "endpoints": {
+      "GraphQL Endpoint": {
+        "url": "http://localhost:3000/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

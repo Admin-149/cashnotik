@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, IconButton, useDisclosure } from '@chakra-ui/core';
+import { Box, Flex, Heading, useDisclosure } from '@chakra-ui/core';
 import { useTranslation } from 'react-i18next';
 import { Reference, useMutation } from '@apollo/client';
 import { AlertMessage } from '../../../components/Modal/AlertMessage';
