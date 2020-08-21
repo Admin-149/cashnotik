@@ -10,6 +10,16 @@
     "titlePlaceholder": "Введите название счета"
   },
   "attention": "Внимание",
+  "categories": {
+    "alertDeleteText": "Вы уверены, что хотите удалить категорию",
+    "alertDeleteTitle": "Удалить категорию",
+    "createButton": "Создать категорию",
+    "createTitle": "Создание категории",
+    "iconLabel": "Выберите иконку",
+    "currentIconLabel": "Текущая иконка",
+    "titleLabel": "Название",
+    "titlePlaceholder": "Введите название категории"
+  },
   "form": {
     "cancelButton": "Отмена",
     "fieldRequired": "Поле обязательно для заполнения",

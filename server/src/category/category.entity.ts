@@ -6,14 +6,14 @@ export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  icon: string;
+
   @Column({
     unique: true,
   })
   title: string;
 
-  @OneToMany(
-    () => Operation,
-    (operation) => operation.category,
-  )
+  @OneToMany(() => Operation, (operation) => operation.category)
   operations: Operation[];
 }

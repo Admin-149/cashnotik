@@ -25,4 +25,9 @@ export class CategoryResolver {
   async updateCategory(@Args('input') input: UpdateCategoryInput) {
     return await this.categoryService.update(input);
   }
+
+  @Mutation('deleteCategory')
+  async deleteAccount(@Args('id') id: number) {
+    return await this.categoryService.remove(id);
+  }
 }

@@ -1,16 +1,19 @@
 type Category {
+    icon: String
     id: Int!
-    title: String!
     operations: [Operation]!
+    title: String!
 }
 
 input CreateCategoryInput {
+    icon: String!
     title: String!
 }
 
 input UpdateCategoryInput {
     id: Int!
-    title: String!
+    icon: String
+    title: String
 }
 
 extend type Query {

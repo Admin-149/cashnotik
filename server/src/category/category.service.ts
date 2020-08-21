@@ -1,4 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from './category.entity';
@@ -29,6 +34,7 @@ export class CategoryService {
 
     const category = new Category();
     category.title = input.title;
+    category.icon = input.icon;
 
     await this.categoryRepository.save(category);
     return category;
@@ -42,7 +48,15 @@ export class CategoryService {
     return updatedCategory;
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<Category> {
+    const existCategory = await this.categoryRepository.findOne(id);
+    if (!existCategory) {
+      throw new HttpException(
+        "Category with provided id doesn't exist",
+        HttpStatus.CONFLICT,
+      );
+    }
     await this.categoryRepository.delete(id);
+    return existCategory;
   }
 }

@@ -16,7 +16,7 @@
     "client:lint": "cd client && npx eslint \"src/**/*.{ts,tsx}\" --fix",
     "server:build": "cd server && npm run build",
     "server:start": "cd server && npm run start:dev",
-    "server:typings": "ts-node server/src/generate-typings",
+    "server:typings": "cd server && npx ts-node src/generate-typings",
     "server:lint": "eslint \"server/src/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "test": "jest",

@@ -18,12 +18,14 @@ export interface UpdateAccountInput {
 }
 
 export interface CreateCategoryInput {
+    icon: string;
     title: string;
 }
 
 export interface UpdateCategoryInput {
     id: number;
-    title: string;
+    icon?: string;
+    title?: string;
 }
 
 export interface CreateOperationInput {
@@ -81,9 +83,10 @@ export interface AccessToken {
 }
 
 export interface Category {
+    icon?: string;
     id: number;
-    title: string;
     operations: Operation[];
+    title: string;
 }
 
 export interface Operation {

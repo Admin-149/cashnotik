@@ -1,10 +1,9 @@
 import {
   Heading,
-  Box,
   Text,
-  PseudoBox,
   useDisclosure,
   CloseButton,
+  Flex,
 } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -36,15 +35,13 @@ export const Account = ({ amount, title, id }: TAccount) => {
     },
   });
 
-  const onmDeleteConfirm = async () => {
+  const onDeleteConfirm = async () => {
     await deleteAccount();
     onClose();
   };
 
   return (
-    <PseudoBox
-      as={Box}
-      display="flex"
+    <Flex
       justifyContent="space-between"
       padding="10px"
       maxWidth="500px"
@@ -55,7 +52,7 @@ export const Account = ({ amount, title, id }: TAccount) => {
         title={t('accounts.alertDeleteTitle')}
         isOpen={isOpen}
         onClose={onClose}
-        onConfirm={onmDeleteConfirm}
+        onConfirm={onDeleteConfirm}
       >
         {t('accounts.alertDeleteText')} <b>{title}</b>?
       </AlertMessage>
@@ -64,6 +61,6 @@ export const Account = ({ amount, title, id }: TAccount) => {
         <Text>{`${formatBalance(amount)} ${t('currency')}`}</Text>
       </div>
       <CloseButton size="sm" onClick={onOpen} />
-    </PseudoBox>
+    </Flex>
   );
 };

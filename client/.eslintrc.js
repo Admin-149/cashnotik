@@ -42,5 +42,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
+    'consistent-return': 'off',
   },
 };

@@ -19,7 +19,7 @@ import {
 import isEmpty from 'lodash/isEmpty';
 import { TAccountCreatePanelFormData } from './AccountCreatePanel';
 
-interface AccountCreateSubmitFormProps {
+interface TAccountCreateSubmitFormProps {
   isOpen: boolean;
   onCancel: () => void;
   onSubmit: (formData: TAccountCreatePanelFormData) => void;
@@ -29,7 +29,7 @@ export const AccountCreateSubmitForm = ({
   isOpen,
   onSubmit,
   onCancel,
-}: AccountCreateSubmitFormProps) => {
+}: TAccountCreateSubmitFormProps) => {
   const titleInputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const { t } = useTranslation('common');
   const { register, handleSubmit, errors } = useForm<
