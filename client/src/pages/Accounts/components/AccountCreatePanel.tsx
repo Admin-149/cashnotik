@@ -1,10 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { Button, useDisclosure } from '@chakra-ui/core';
-import { useMutation } from '@apollo/client';
-import { TAccount, TCreateAccountInput } from '../accountTypes';
-import { CREATE_ACCOUNT } from '../accountsQueries';
 import { AccountCreateSubmitForm } from './AccountCreateSubmitForm';
+import { useCreateAccountMutation } from '../../../generated/graphql';
 
 export interface TAccountCreatePanelFormData {
   amount: string;
@@ -15,10 +13,7 @@ export const AccountCreatePanel = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation('common');
 
-  const [createAccount] = useMutation<
-    { createAccount: TAccount },
-    { input: TCreateAccountInput }
-  >(CREATE_ACCOUNT, {
+  const [createAccount] = useCreateAccountMutation({
     update(cache, result) {
       cache.modify({
         fields: {

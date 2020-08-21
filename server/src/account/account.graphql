@@ -1,5 +1,5 @@
 type Account {
-  amount: Int!
+  amount: Float!
   id: Int!
   title: String!
 }
@@ -10,12 +10,12 @@ extend type Query {
 }
 
 input CreateAccountInput {
-  amount: Int!
+  amount: Float!
   title: String!
 }
 
 input UpdateAccountInput {
-  amount: Int
+  amount: Float
   id: Int!
   title: String
 }

@@ -84,7 +84,7 @@ export const CategoryCreateForm = ({
                   <FormErrorMessage>{t('form.fieldRequired')}</FormErrorMessage>
                 )}
               </FormControl>
-              <Box>
+              <FormControl>
                 <FormLabel htmlFor="icon">
                   {t('categories.iconLabel')}
                 </FormLabel>
@@ -119,7 +119,7 @@ export const CategoryCreateForm = ({
                     color="blue"
                   />
                 </Flex>
-              </Box>
+              </FormControl>
             </Stack>
           </DrawerBody>
           <DrawerFooter justifyContent="flex-start">

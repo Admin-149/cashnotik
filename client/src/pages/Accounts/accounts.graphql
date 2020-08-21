@@ -5,3 +5,17 @@ query GetAccounts {
         title
     }
 }
+
+mutation CreateAccount($input: CreateAccountInput!) {
+    createAccount(input: $input) {
+        amount
+        id
+        title
+    }
+}
+
+mutation DeleteAccount($id: Int!) {
+    deleteAccount(id: $id) {
+        id
+    }
+}

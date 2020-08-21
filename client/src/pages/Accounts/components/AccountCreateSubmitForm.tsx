@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+import NumberFormat from 'react-number-format';
 import {
   Button,
   Drawer,
@@ -14,6 +15,8 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightAddon,
   Stack,
 } from '@chakra-ui/core';
 import isEmpty from 'lodash/isEmpty';
@@ -32,7 +35,7 @@ export const AccountCreateSubmitForm = ({
 }: TAccountCreateSubmitFormProps) => {
   const titleInputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const { t } = useTranslation('common');
-  const { register, handleSubmit, errors } = useForm<
+  const { register, handleSubmit, errors, control } = useForm<
     TAccountCreatePanelFormData
   >();
 
@@ -73,13 +76,18 @@ export const AccountCreateSubmitForm = ({
                 <FormLabel htmlFor="amount">
                   {t('accounts.amountLabel')}
                 </FormLabel>
-                <Input
-                  id="amount"
-                  name="amount"
-                  placeholder={t('accounts.amountPlaceholder')}
-                  ref={register({ required: true })}
-                  type="number"
-                />
+                <InputGroup>
+                  <Controller
+                    decimalScale={2}
+                    name="amount"
+                    control={control}
+                    placeholder={t('accounts.amountPlaceholder')}
+                    rules={{ required: true }}
+                    customInput={Input}
+                    as={NumberFormat}
+                  />
+                  <InputRightAddon>{t('currency')}</InputRightAddon>
+                </InputGroup>
                 {errors.amount && (
                   <FormErrorMessage>{t('form.fieldRequired')}</FormErrorMessage>
                 )}

@@ -7,20 +7,16 @@ import {
 } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Reference, useMutation } from '@apollo/client';
+import { Reference } from '@apollo/client';
 import { formatBalance } from '../../../lib/formatText/formatText';
-import { TAccount } from '../accountTypes';
-import { DELETE_ACCOUNT } from '../accountsQueries';
 import { AlertMessage } from '../../../components/Modal/AlertMessage';
+import { TAccount, useDeleteAccountMutation } from '../../../generated/graphql';
 
 export const Account = ({ amount, title, id }: TAccount) => {
   const { t } = useTranslation('common');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [deleteAccount] = useMutation<
-    { deleteAccount: Pick<TAccount, 'id'> },
-    { id: number }
-  >(DELETE_ACCOUNT, {
+  const [deleteAccount] = useDeleteAccountMutation({
     variables: { id },
     update(cache) {
       cache.modify({
