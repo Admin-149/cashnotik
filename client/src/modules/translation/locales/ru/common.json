@@ -1,0 +1,42 @@
+{
+  "accounts": {
+    "alertDeleteText": "Вы уверены, что хотите удалить счет",
+    "alertDeleteTitle": "Удалить счет",
+    "amountPlaceholder": "Введите количество на счете",
+    "amountLabel": "Количество денег на счете",
+    "createButton": "Создать счет",
+    "createTitle": "Создание счета",
+    "titleLabel": "Название счета",
+    "titlePlaceholder": "Введите название счета"
+  },
+  "attention": "Внимание",
+  "categories": {
+    "alertDeleteText": "Вы уверены, что хотите удалить категорию",
+    "alertDeleteTitle": "Удалить категорию",
+    "createButton": "Создать категорию",
+    "createTitle": "Создание категории",
+    "iconLabel": "Выберите иконку",
+    "currentIconLabel": "Текущая иконка",
+    "titleLabel": "Название",
+    "titlePlaceholder": "Введите название категории"
+  },
+  "form": {
+    "cancelButton": "Отмена",
+    "fieldRequired": "Поле обязательно для заполнения",
+    "saveButton": "Сохранить",
+    "confirmButton": "Подтвердить"
+  },
+  "auth": {
+    "login": "Войти",
+    "logout": "Выйти",
+    "password": "Пароль",
+    "username": "Имя пользователя"
+  },
+  "currency": "₽",
+  "pages": {
+    "accounts": "Счета",
+    "categories": "Категории",
+    "operations": "Операции",
+    "reports": "Отчет"
+  }
+}

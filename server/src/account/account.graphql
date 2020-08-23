@@ -1,0 +1,27 @@
+type Account {
+  amount: Float!
+  id: Int!
+  title: String!
+}
+
+extend type Query {
+  account(id: Int!): Account
+  accounts: [Account]!
+}
+
+input CreateAccountInput {
+  amount: Float!
+  title: String!
+}
+
+input UpdateAccountInput {
+  amount: Float
+  id: Int!
+  title: String
+}
+
+extend type Mutation {
+  createAccount(input: CreateAccountInput!): Account!
+  deleteAccount(id: Int!): Account!
+  updateAccount(input: UpdateAccountInput!): Account!
+}

@@ -1,0 +1,12 @@
+type User {
+    id: ID!
+    username: String!
+}
+
+type AccessToken {
+    accessToken: String!
+}
+
+extend type Query {
+    me: User
+}

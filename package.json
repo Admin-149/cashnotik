@@ -1,0 +1,42 @@
+{
+  "name": "cashnotik",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "db:start": "docker run --rm --name pg-docker --env-file .env -d -p 5432:5432 -v $(pwd)/../tmp/db/cashnotik:/var/lib/postgresql/data postgres",
+    "db:start-volume": "docker run --rm --name pg-docker --env-file .env -d -p 5432:5432 postgres",
+    "db:stop": "docker stop pg-docker",
+    "nginx": "docker build -t 1.0.0 . && docker run --rm -p 80:80 -p 443:443 -v `pwd`:/www/ --name nginx-cashnotik 1.0.0",
+    "client:build": "cd client && npm run build",
+    "client:start": "cd client && npm run dev",
+    "client:typings": "cd client && npm run codegen",
+    "client:lint": "cd client && npx eslint \"src/**/*.{ts,tsx}\" --fix",
+    "server:build": "cd server && npm run build",
+    "server:start": "cd server && npm run start:dev",
+    "server:typings": "cd server && npx ts-node src/generate-typings",
+    "server:lint": "eslint \"server/src/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}

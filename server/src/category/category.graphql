@@ -1,0 +1,28 @@
+type Category {
+    icon: String
+    id: Int!
+    operations: [Operation]!
+    title: String!
+}
+
+input CreateCategoryInput {
+    icon: String!
+    title: String!
+}
+
+input UpdateCategoryInput {
+    id: Int!
+    icon: String
+    title: String
+}
+
+extend type Query {
+    categories: [Category]!
+    category(id: Int!): Category
+}
+
+extend type Mutation {
+    createCategory(input: CreateCategoryInput!): Category!
+    updateCategory(input: UpdateCategoryInput!): Category!
+    deleteCategory(id: Int!): Category!
+}

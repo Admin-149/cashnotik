@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './modules/translation/i18n';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const render = () => {
+  // eslint-disable-next-line global-require
+  const App = require('./app/App').default;
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  ReactDOM.render(<App />, document.getElementById('root'));
+};
+
+render();
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./app/App', render);
+}

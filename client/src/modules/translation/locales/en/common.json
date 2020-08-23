@@ -1,0 +1,42 @@
+{
+  "accounts": {
+    "alertDeleteText": "Are you sure you want to delete the account",
+    "alertDeleteTitle": "Delete account",
+    "amountLabel": "Account amount",
+    "amountPlaceholder": "Please enter account amount",
+    "createButton": "Create account",
+    "createTitle": "Create account",
+    "titleLabel": "Account title",
+    "titlePlaceholder": "Please type account title"
+  },
+  "attention": "Attention",
+  "categories": {
+    "alertDeleteText": "Are you sure you want to delete the category",
+    "alertDeleteTitle": "Delete category",
+    "createButton": "Create category",
+    "createTitle": "Create category",
+    "iconLabel": "Selected icon",
+    "currentIconLabel": "Current icon",
+    "titleLabel": "Category title",
+    "titlePlaceholder": "Please enter category title"
+  },
+  "form": {
+    "cancelButton": "Cancel",
+    "fieldRequired": "Field is required",
+    "saveButton": "Save",
+    "confirmButton": "Confirm"
+  },
+  "auth": {
+    "login": "Submit",
+    "logout": "Logout",
+    "password": "Password",
+    "username": "Username"
+  },
+  "currency": "₽",
+  "pages": {
+    "accounts": "Accounts",
+    "categories": "Categories",
+    "operations": "Operations",
+    "reports": "Report"
+  }
+}
