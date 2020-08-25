@@ -1,22 +1,17 @@
 import { Button, useDisclosure } from '@chakra-ui/core';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from '@apollo/client';
 import React from 'react';
-import { CREATE_CATEGORY } from '../categoriesQueries';
-import { TCategory, TCreateCategoryInput } from '../categoriesTypes';
 import {
   CategoryCreateForm,
   TCategoryCreateFormData,
 } from './CategoryCreateForm';
+import { useCreateCategoryMutation } from '../../../generated/graphql';
 
 export const CategoryCreatePanel = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation('common');
 
-  const [createCategory] = useMutation<
-    { createCategory: TCategory },
-    { input: TCreateCategoryInput }
-  >(CREATE_CATEGORY, {
+  const [createCategory] = useCreateCategoryMutation({
     update(cache, result) {
       cache.modify({
         fields: {
