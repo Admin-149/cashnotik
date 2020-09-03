@@ -1,0 +1,21 @@
+query GetCategories {
+    categories {
+        icon
+        id
+        title
+    }
+}
+
+mutation CreateCategory($input: CreateCategoryInput!) {
+    createCategory(input: $input) {
+        icon
+        id
+        title
+    }
+}
+
+mutation DeleteCategory($id: Int!) {
+    deleteCategory(id: $id) {
+        id
+    }
+}

@@ -85,7 +85,7 @@ export interface AccessToken {
 export interface Category {
     icon?: string;
     id: number;
-    operations: Operation[];
+    operations?: Operation[];
     title: string;
 }
 

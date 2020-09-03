@@ -1,7 +1,7 @@
 type Category {
     icon: String
     id: Int!
-    operations: [Operation]!
+    operations: [Operation]
     title: String!
 }
 

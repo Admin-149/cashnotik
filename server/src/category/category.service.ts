@@ -17,7 +17,8 @@ export class CategoryService {
   ) {}
 
   async findAll(): Promise<Category[]> {
-    return this.categoryRepository.find();
+    const categories = await this.categoryRepository.find();
+    return categories.sort((a, b) => (a.title > b.title ? 1 : -1));
   }
 
   async findOne(id: number): Promise<Category> {
