@@ -11,6 +11,9 @@ yarn-error.log*
 
 # Dependency directories
 /node_modules
+/client/node_modules/
+/server/node_modules/
+/client/public/
 /jspm_packages
 /bower_components
 
